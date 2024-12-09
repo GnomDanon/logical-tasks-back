@@ -25,8 +25,7 @@ public class TaskSolver {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "task_solver_id_seq")
-    @SequenceGenerator(name = "task_solver_id_seq", sequenceName = "task_solver_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "score")
