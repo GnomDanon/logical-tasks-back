@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -19,6 +20,7 @@ import ru.tasks.logical.document.entity.Document;
 import ru.tasks.logical.user.entity.User;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -60,5 +62,8 @@ public class Task {
     @ManyToOne
     @JoinColumn(name = "document_based_on_id")
     private Document documentBasedOn;
+
+    @OneToMany(mappedBy = "task")
+    private List<TaskSolver> taskSolvers;
 
 }
