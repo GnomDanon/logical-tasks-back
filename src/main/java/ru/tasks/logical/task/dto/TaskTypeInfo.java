@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Schema(description = "Тип задания")
-public class TaskType {
+public class TaskTypeInfo {
 
     @Schema(description = "Название типа задания")
     private String taskTypeName;

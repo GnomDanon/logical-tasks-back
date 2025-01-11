@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.tasks.logical.task.dto.CreateTaskSolverRequest;
 import ru.tasks.logical.task.dto.TaskGenerateRequest;
 import ru.tasks.logical.task.dto.TaskInfo;
-import ru.tasks.logical.task.dto.TaskSolver;
-import ru.tasks.logical.task.dto.TaskType;
+import ru.tasks.logical.task.dto.TaskSolverInfo;
+import ru.tasks.logical.task.dto.TaskTypeInfo;
+import ru.tasks.logical.task.service.TaskService;
+import ru.tasks.logical.task.service.TaskSolverService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +27,10 @@ import java.util.List;
 @Tag(name = "Задача")
 public class TaskController {
 
+    private final TaskService taskService;
+
+    private final TaskSolverService taskSolverService;
+
     @Operation(summary = "Генерация задания")
     @PostMapping("/generate")
     public Long generate(@RequestBody @Valid TaskGenerateRequest request) {
@@ -34,19 +40,19 @@ public class TaskController {
     @Operation(summary = "Получение задач, сгенерированных заданных автором")
     @GetMapping("/author/{authorId}")
     public List<TaskInfo> getByAuthorId(@PathVariable Long authorId) {
-        return new ArrayList<>();
+        return taskService.getTasksByAuthorId(authorId);
     }
 
     @Operation(summary = "Получение задач, доступных данному студенту")
     @GetMapping("/student/{studentId}")
     public List<TaskInfo> getByStudentId(@PathVariable Long studentId) {
-        return new ArrayList<>();
+        return taskSolverService.getTasksByTaskSolverId(studentId);
     }
 
     @Operation(summary = "Получение доступных типов задач")
     @GetMapping("/types")
-    public List<TaskType> getTaskTypes() {
-        return new ArrayList<>();
+    public List<TaskTypeInfo> getTaskTypes() {
+        return taskService.getTaskTypes();
     }
 
     @Operation(summary = "Выдача доступа к решению задачи для студента")
@@ -57,7 +63,7 @@ public class TaskController {
 
     @Operation(summary = "Получение всех студентов, решающих заданное задание")
     @GetMapping("/taskSolvers/{taskId}")
-    public List<TaskSolver> getTaskSolvers(@PathVariable Long taskId) {
-        return new ArrayList<>();
+    public List<TaskSolverInfo> getTaskSolvers(@PathVariable Long taskId) {
+        return taskSolverService.getTaskSolversByTaskId(taskId);
     }
 }

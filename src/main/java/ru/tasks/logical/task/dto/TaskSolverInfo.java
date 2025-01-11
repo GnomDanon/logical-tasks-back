@@ -2,12 +2,11 @@ package ru.tasks.logical.task.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import ru.tasks.logical.task.dto.TaskInfo;
 import ru.tasks.logical.user.dto.UserInfo;
 
 @Data
 @Schema(description = "Соотношение Задание - Решающий")
-public class TaskSolver {
+public class TaskSolverInfo {
 
     @Schema(description = "Идентификатор соотношения Задание - Решающий")
     private Long id;
