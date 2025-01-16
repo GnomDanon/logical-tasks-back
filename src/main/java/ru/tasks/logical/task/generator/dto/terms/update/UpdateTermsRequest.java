@@ -4,12 +4,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
-@Schema(name = "Запрос на изменения терминов")
+@Schema(description = "Запрос на изменения терминов")
 public class UpdateTermsRequest {
 
-	@Schema(name = "Идентификатор генерируемой задачи")
+	@Schema(description = "Идентификатор генерируемой задачи")
 	private Long taskId;
 
-	@Schema(name = "Термины")
+	@Schema(description = "Термины")
 	private String[] terms;
 }

@@ -5,12 +5,12 @@ import lombok.Data;
 import ru.tasks.logical.common.dto.QuestionAndAnswer;
 
 @Data
-@Schema(name = "Запрос на изменение вопросов и ответов")
+@Schema(description = "Запрос на изменение вопросов и ответов")
 public class UpdateQuestionsRequest {
 
-	@Schema(name = "Идентификатор генерируемой задачи")
+	@Schema(description = "Идентификатор генерируемой задачи")
 	private Long taskId;
 
-	@Schema(name = "Вопросы и ответы")
+	@Schema(description = "Вопросы и ответы")
 	private QuestionAndAnswer[] questionsAndAnswers;
 }

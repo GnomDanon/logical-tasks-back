@@ -4,15 +4,15 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
-@Schema(name = "Вопрос и ответ")
+@Schema(description = "Вопрос и ответ")
 public class QuestionAndAnswer {
 
-	@Schema(name = "Идентификатор вопроса")
+	@Schema(description = "Идентификатор вопроса")
 	private Long questionId;
 
-	@Schema(name = "Вопрос")
+	@Schema(description = "Вопрос")
 	private String question;
 
-	@Schema(name = "Ответ")
+	@Schema(description = "Ответ")
 	private String answer;
 }

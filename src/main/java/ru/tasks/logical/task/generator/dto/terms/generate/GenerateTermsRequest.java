@@ -4,12 +4,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
-@Schema(name = "Запрос на генерацию терминов из текста")
+@Schema(description = "Запрос на генерацию терминов из текста")
 public class GenerateTermsRequest {
 
-	@Schema(name = "Идентификатор документа")
+	@Schema(description = "Идентификатор документа")
 	private Long documentId;
 
-	@Schema(name = "Количество генерируемых терминов")
+	@Schema(description = "Количество генерируемых терминов")
 	private int termsCount;
 }
