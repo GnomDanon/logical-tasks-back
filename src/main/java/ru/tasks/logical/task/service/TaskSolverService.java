@@ -4,8 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.tasks.logical.task.dto.TaskInfo;
 import ru.tasks.logical.task.dto.TaskSolverInfo;
-import ru.tasks.logical.task.entity.Task;
-import ru.tasks.logical.task.entity.TaskSolver;
 import ru.tasks.logical.task.mapper.TaskMapper;
 import ru.tasks.logical.task.mapper.TaskSolverMapper;
 import ru.tasks.logical.task.repository.TaskSolverRepository;
