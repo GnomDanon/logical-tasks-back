@@ -3,7 +3,7 @@ package ru.tasks.logical.gpt.connection;
 import ru.tasks.logical.gpt.dto.common.terms.GPTGetTermsFromTextRequest;
 import ru.tasks.logical.gpt.dto.common.terms.GPTGetTermsFromTextResponse;
 
-public class MockGPTConnection implements GPTConnection{
+public class MockGPTConnection implements GPTConnection {
 	String[] themes = new String[] {
 			"алиса", "смартфон", "пайтон", "бот", "программирование", "квадрокоптер", "нейросесть",
 			"компьютер", "маркировка"
