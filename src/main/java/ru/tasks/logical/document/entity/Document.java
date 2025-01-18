@@ -12,9 +12,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 import ru.tasks.logical.user.entity.User;
 
 @Entity
+@Accessors(chain = true)
 @Getter
 @Setter
 @NoArgsConstructor
@@ -32,6 +34,9 @@ public class Document {
 
     @Column(name = "description")
     private String description;
+
+    @Column(name = "content")
+    private byte[] content;
 
     @ManyToOne
     @JoinColumn(name = "owner_id")

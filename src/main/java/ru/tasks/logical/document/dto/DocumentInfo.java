@@ -1,10 +1,14 @@
 package ru.tasks.logical.document.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Schema(description = "Информация о документе")
+@AllArgsConstructor
+@NoArgsConstructor
 public class DocumentInfo {
 
     @Schema(description = "Идентификатор документа")
