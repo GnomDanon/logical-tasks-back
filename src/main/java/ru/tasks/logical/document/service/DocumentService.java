@@ -12,6 +12,8 @@ import ru.tasks.logical.user.exception.UserNotFoundException;
 import ru.tasks.logical.user.service.UserService;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -30,5 +32,16 @@ public class DocumentService {
         Document document = new Document().setName(name).setDescription(description).setContent(content).setOwner(user);
         document = documentRepository.save(document);
         return new DocumentInfo(document.getId(), document.getOwner().getId(), document.getName(), document.getDescription());
+    }
+
+    public List<DocumentInfo> findByOwnerId(Long ownerId) {
+        List<Document> documents = documentRepository.findAllByOwner_Id(ownerId);
+        return documents.stream()
+                .map(document -> new DocumentInfo(
+                        document.getId(),
+                        document.getOwner().getId(),
+                        document.getName(),
+                        document.getDescription()))
+                .collect(Collectors.toList());
     }
 }

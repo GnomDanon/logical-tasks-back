@@ -5,6 +5,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +19,7 @@ import ru.tasks.logical.document.dto.DocumentUploadRequest;
 import ru.tasks.logical.document.service.DocumentService;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/document")
@@ -37,5 +40,11 @@ public class DocumentController {
         } catch (Exception e) {
             return ResponseEntity.internalServerError().build();
         }
+    }
+
+    @Operation(summary = "Получение документов, принадлежащих пользователю")
+    @GetMapping("/owner/{id}")
+    public ResponseEntity<List<DocumentInfo>> getDocuments(@PathVariable Long id) {
+        return ResponseEntity.ok(documentService.findByOwnerId(id));
     }
 }
