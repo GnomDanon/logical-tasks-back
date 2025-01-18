@@ -13,18 +13,18 @@ public class CrosswordConverter {
 		StringBuilder column = new StringBuilder();
 		column.append("{");
 
-		column.append("\"across\"{");
+		column.append("\"across\":{");
 		for (CrosswordItem item : acrossItems) {
-			column.append(String.format("\"%d\"", index++));
+			column.append(String.format("\"%d\":", index++));
 			column.append(itemConverter.convertToDatabaseColumn(item));
 			column.append(",");
 		}
 		column.deleteCharAt(column.length() - 1);
 		column.append("},");
 
-		column.append("\"down\"{");
+		column.append("\"down\":{");
 		for (CrosswordItem item: downItems) {
-			column.append(String.format("\"%d\"", index++));
+			column.append(String.format("\"%d\":", index++));
 			column.append(itemConverter.convertToDatabaseColumn(item));
 			column.append(",");
 		}

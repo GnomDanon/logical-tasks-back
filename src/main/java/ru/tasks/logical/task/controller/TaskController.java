@@ -3,13 +3,16 @@ package ru.tasks.logical.task.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.tasks.logical.task.dto.Task;
 import ru.tasks.logical.task.dto.TaskInfo;
 import ru.tasks.logical.task.dto.TaskSolverInfo;
 import ru.tasks.logical.task.dto.TaskTypeInfo;
+import ru.tasks.logical.task.exception.TaskNotExistsException;
 import ru.tasks.logical.task.service.TaskService;
 import ru.tasks.logical.task.service.TaskSolverService;
 
@@ -30,6 +33,16 @@ public class TaskController {
     @GetMapping("/author/{authorId}")
     public List<TaskInfo> getByAuthorId(@PathVariable UUID authorId) {
         return taskService.getTasksByAuthorId(authorId);
+    }
+
+    @Operation(summary = "Получение задания")
+    @GetMapping("/{taskId}")
+    public ResponseEntity<Task> getById(@PathVariable UUID taskId) {
+        try {
+            return ResponseEntity.ok(taskService.getById(taskId));
+        } catch (TaskNotExistsException e) {
+            return ResponseEntity.internalServerError().build();
+        }
     }
 
     @Operation(summary = "Получение доступных типов задач")
