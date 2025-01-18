@@ -1,8 +1,10 @@
 package ru.tasks.logical.gpt.connection;
 
-import ru.tasks.logical.gpt.dto.common.terms.GPTGetTermsFromTextRequest;
-import ru.tasks.logical.gpt.dto.common.terms.GPTGetTermsFromTextResponse;
+import ru.tasks.logical.common.dto.CrosswordQuestionItem;
+import ru.tasks.logical.common.dto.TestItem;
 
 public interface GPTConnection {
-	GPTGetTermsFromTextResponse parseText(GPTGetTermsFromTextRequest request);
+	String[] generateTerms(byte[] document, int termsCount);
+	CrosswordQuestionItem[] generateCrossword(byte[] document, String[] terms, int questionsCount);
+	TestItem[] generateTest(byte[] document, String[] terms, int questionsCount);
 }

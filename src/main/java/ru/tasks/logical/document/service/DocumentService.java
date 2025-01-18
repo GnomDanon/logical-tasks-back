@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ru.tasks.logical.document.dto.DocumentInfo;
-import ru.tasks.logical.document.dto.DocumentUploadRequest;
 import ru.tasks.logical.document.entity.Document;
+import ru.tasks.logical.document.exception.DocumentNotExistsException;
 import ru.tasks.logical.document.repository.DocumentRepository;
 import ru.tasks.logical.user.entity.User;
 import ru.tasks.logical.user.exception.UserNotFoundException;
@@ -44,5 +44,9 @@ public class DocumentService {
                         document.getName(),
                         document.getDescription()))
                 .collect(Collectors.toList());
+    }
+
+    public Document findById(UUID id) throws DocumentNotExistsException {
+        return documentRepository.findById(id).orElseThrow(DocumentNotExistsException::new);
     }
 }

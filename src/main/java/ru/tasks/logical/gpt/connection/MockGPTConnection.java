@@ -1,32 +1,51 @@
 package ru.tasks.logical.gpt.connection;
 
-import ru.tasks.logical.gpt.dto.common.terms.GPTGetTermsFromTextRequest;
-import ru.tasks.logical.gpt.dto.common.terms.GPTGetTermsFromTextResponse;
+import ru.tasks.logical.common.dto.CrosswordQuestionItem;
+import ru.tasks.logical.common.dto.TestItem;
 
 public class MockGPTConnection implements GPTConnection {
-	String[] themes = new String[] {
-			"алиса", "смартфон", "пайтон", "бот", "программирование", "квадрокоптер", "нейросесть",
-			"компьютер", "маркировка"
+	String[] terms = new String[] {"Карась", "Прикормка", "Гол", "Медведь"};
+	CrosswordQuestionItem[] crosswordQuestionItems = new CrosswordQuestionItem[] {
+			new CrosswordQuestionItem("Кто дуреет с этой прикормки?", "Карась"),
+			new CrosswordQuestionItem("С чего дуреет карась?", "Прикормка"),
+			new CrosswordQuestionItem("Кто кричит 'Гол'?", "Медведь"),
+			new CrosswordQuestionItem("Что кричит медведь?", "Гол")
 	};
-
-	String[] questions = new String[] {
-			"Сервис для поиска информации в интернете",
-			"Портативное устройство массового использования, выполняющие многозадачные функции",
-			"Программа нужная для создания приложений",
-			"Самый сложный противник в шахматах",
-			"Профессия людей, любящих сидеть за компьютером",
-			"Летающая тарелка для детей",
-			"То чего бояться все программисты",
-			"Игра невозможна без…",
-			"процесс присвоения метки, которая обеспечивает правильный контекст для каждого ввода в наборе обучающих " +
-					"данных или «ответ», который вы хотите, чтобы модель ИИ возвращала во время обучения. " +
-					"В компьютерном зрении есть два типа маркировки: аннотация и тегирование. " +
-					"Маркировка может выполняться собственными силами или с помощью аутсорсинговых " +
-					"или краудсорсинговых услуг"
+	TestItem[] testItems = new TestItem[] {
+			new TestItem(
+					"Кто дуреет с этой прикормки?",
+					new String[] {"Медведь", "Карась"},
+					0
+			),
+			new TestItem(
+					"С чего дуреет карась?",
+					new String[] {"Кондиции", "Прикормка"},
+					1
+			),
+			new TestItem(
+					"Кто кричит 'Гол'?",
+					new String[] {"Волк", "Заяц", "Медведь", "Мышь"},
+					2
+			),
+			new TestItem(
+					"Что кричит медведь?",
+					new String[] {"Кидай", "Бой", "Бей", "Гол"},
+					3
+			)
 	};
 
 	@Override
-	public GPTGetTermsFromTextResponse parseText(GPTGetTermsFromTextRequest request) {
-		return new GPTGetTermsFromTextResponse(themes);
+	public String[] generateTerms(byte[] document, int termsCount) {
+		return terms;
+	}
+
+	@Override
+	public CrosswordQuestionItem[] generateCrossword(byte[] document, String[] terms, int questionsCount) {
+		return crosswordQuestionItems;
+	}
+
+	@Override
+	public TestItem[] generateTest(byte[] document, String[] terms, int questionsCount) {
+		return testItems;
 	}
 }

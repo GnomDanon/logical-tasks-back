@@ -15,6 +15,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 import ru.tasks.logical.document.entity.Document;
 import ru.tasks.logical.user.entity.User;
 
@@ -25,6 +26,7 @@ import java.util.UUID;
 @Entity
 @Getter
 @Setter
+@Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "task")
@@ -45,8 +47,14 @@ public class Task {
     @Column(name = "task_type")
     private TaskType taskType;
 
-    @Column(name = "content")
-    private String content; //TODO
+    @Column(name = "terms", columnDefinition = "text")
+    private String terms;
+
+    @Column(name = "questions", columnDefinition = "text")
+    private String questions;
+
+    @Column(name = "content", columnDefinition = "text")
+    private String content;
 
     @Column(name = "max_score")
     private int maxScore;

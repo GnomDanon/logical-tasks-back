@@ -2,7 +2,7 @@ package ru.tasks.logical.task.generator.dto.questions.update;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import ru.tasks.logical.common.dto.QuestionAndAnswer;
+import ru.tasks.logical.task.generator.dto.questions.Question;
 
 import java.util.UUID;
 
@@ -14,5 +14,5 @@ public class UpdateQuestionsRequest {
 	private UUID taskId;
 
 	@Schema(description = "Вопросы и ответы")
-	private QuestionAndAnswer[] questionsAndAnswers;
+	private Question[] questions;
 }

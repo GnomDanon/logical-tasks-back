@@ -2,11 +2,13 @@ package ru.tasks.logical.task.generator.dto.questions.generate;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import ru.tasks.logical.common.dto.QuestionAndAnswer;
+import lombok.experimental.Accessors;
+import ru.tasks.logical.task.generator.dto.questions.Question;
 
 import java.util.UUID;
 
 @Data
+@Accessors(chain = true)
 @Schema(description = "Ответ со сгенерированными вопросами")
 public class GenerateQuestionsResponse {
 
@@ -14,5 +16,5 @@ public class GenerateQuestionsResponse {
 	private UUID taskId;
 
 	@Schema(description = "Вопросы и ответы")
-	private QuestionAndAnswer[] questionsAndAnswers;
+	private Question[] questions;
 }

@@ -11,4 +11,7 @@ public class GenerateTaskRequest {
 
 	@Schema(description = "Идентификатор генерируемого задания")
 	private UUID taskId;
+
+	@Schema(description = "Название генерируемой задачи")
+	private String taskName;
 }
