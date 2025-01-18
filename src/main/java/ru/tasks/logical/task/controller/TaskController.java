@@ -14,6 +14,7 @@ import ru.tasks.logical.task.service.TaskService;
 import ru.tasks.logical.task.service.TaskSolverService;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/task")
@@ -27,7 +28,7 @@ public class TaskController {
 
     @Operation(summary = "Получение задач, сгенерированных заданных автором")
     @GetMapping("/author/{authorId}")
-    public List<TaskInfo> getByAuthorId(@PathVariable Long authorId) {
+    public List<TaskInfo> getByAuthorId(@PathVariable UUID authorId) {
         return taskService.getTasksByAuthorId(authorId);
     }
 
@@ -39,7 +40,7 @@ public class TaskController {
 
     @Operation(summary = "Получение всех студентов, решающих заданное задание")
     @GetMapping("/taskSolvers/{taskId}")
-    public List<TaskSolverInfo> getTaskSolvers(@PathVariable Long taskId) {
+    public List<TaskSolverInfo> getTaskSolvers(@PathVariable UUID taskId) {
         return taskSolverService.getTaskSolversByTaskId(taskId);
     }
 }

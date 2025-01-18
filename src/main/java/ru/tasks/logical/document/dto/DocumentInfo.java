@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @Data
 @Schema(description = "Информация о документе")
 @AllArgsConstructor
@@ -12,10 +14,10 @@ import lombok.NoArgsConstructor;
 public class DocumentInfo {
 
     @Schema(description = "Идентификатор документа")
-    private Long id;
+    private UUID id;
 
     @Schema(description = "Владелец документа")
-    private Long userId;
+    private UUID userId;
 
     @Schema(description = "Название документа")
     private String name;

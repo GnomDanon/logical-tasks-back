@@ -7,13 +7,14 @@ import ru.tasks.logical.user.dto.UserInfo;
 import ru.tasks.logical.task.entity.TaskType;
 
 import java.util.Date;
+import java.util.UUID;
 
 @Data
 @Schema(description = "Информация о задании")
 public class TaskInfo {
 
     @Schema(description = "Идентификатор задания")
-    private Long id;
+    private UUID id;
 
     @Schema(description = "Название задания")
     private String name;

@@ -4,12 +4,14 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import ru.tasks.logical.user.dto.UserInfo;
 
+import java.util.UUID;
+
 @Data
 @Schema(description = "Соотношение Задание - Решающий")
 public class TaskSolverInfo {
 
     @Schema(description = "Идентификатор соотношения Задание - Решающий")
-    private Long id;
+    private UUID id;
 
     @Schema(description = "Пользователь, решающий задание")
     private UserInfo solver;

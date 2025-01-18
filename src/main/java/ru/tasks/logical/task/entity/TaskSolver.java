@@ -14,6 +14,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import ru.tasks.logical.user.entity.User;
 
+import java.util.UUID;
+
 @Entity
 @Getter
 @Setter
@@ -24,8 +26,8 @@ public class TaskSolver {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     @Column(name = "score")
     private int score;

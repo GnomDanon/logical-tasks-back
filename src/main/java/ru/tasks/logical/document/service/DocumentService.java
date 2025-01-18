@@ -13,6 +13,7 @@ import ru.tasks.logical.user.service.UserService;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,7 +23,7 @@ public class DocumentService {
     private final DocumentRepository documentRepository;
     private final UserService userService;
 
-    public DocumentInfo upload(Long userId, String name, String description, MultipartFile file)
+    public DocumentInfo upload(UUID userId, String name, String description, MultipartFile file)
             throws IOException, UserNotFoundException {
 
         byte[] content = file.getBytes();
@@ -34,7 +35,7 @@ public class DocumentService {
         return new DocumentInfo(document.getId(), document.getOwner().getId(), document.getName(), document.getDescription());
     }
 
-    public List<DocumentInfo> findByOwnerId(Long ownerId) {
+    public List<DocumentInfo> findByOwnerId(UUID ownerId) {
         List<Document> documents = documentRepository.findAllByOwner_Id(ownerId);
         return documents.stream()
                 .map(document -> new DocumentInfo(

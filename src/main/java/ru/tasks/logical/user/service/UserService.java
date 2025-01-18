@@ -11,6 +11,8 @@ import ru.tasks.logical.user.exception.EmailAlreadyExistsException;
 import ru.tasks.logical.user.exception.UserNotFoundException;
 import ru.tasks.logical.user.repository.UserRepository;
 
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -52,7 +54,7 @@ public class UserService {
                 .orElseThrow(() -> new UsernameNotFoundException("Пользователь с таким email не найден"));
     }
 
-    public User getById(Long id) throws UserNotFoundException {
+    public User getById(UUID id) throws UserNotFoundException {
         return userRepository.findById(id)
                 .orElseThrow(UserNotFoundException::new);
     }

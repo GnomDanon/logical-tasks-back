@@ -15,6 +15,8 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 import ru.tasks.logical.user.entity.User;
 
+import java.util.UUID;
+
 @Entity
 @Accessors(chain = true)
 @Getter
@@ -26,8 +28,8 @@ public class Document {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     @Column(name = "name")
     private String name;

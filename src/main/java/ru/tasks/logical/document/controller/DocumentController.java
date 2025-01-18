@@ -20,6 +20,7 @@ import ru.tasks.logical.document.service.DocumentService;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/document")
@@ -31,7 +32,7 @@ public class DocumentController {
 
     @Operation(summary = "Загрузка файла")
     @PostMapping("/upload")
-    public ResponseEntity<DocumentInfo> upload(@RequestParam("userId") Long userId, @RequestParam("name") String name,
+    public ResponseEntity<DocumentInfo> upload(@RequestParam("userId") UUID userId, @RequestParam("name") String name,
                                                @RequestParam("description") String description,
                                                @RequestParam("file") MultipartFile file) {
         try {
@@ -44,7 +45,7 @@ public class DocumentController {
 
     @Operation(summary = "Получение документов, принадлежащих пользователю")
     @GetMapping("/owner/{id}")
-    public ResponseEntity<List<DocumentInfo>> getDocuments(@PathVariable Long id) {
+    public ResponseEntity<List<DocumentInfo>> getDocuments(@PathVariable UUID id) {
         return ResponseEntity.ok(documentService.findByOwnerId(id));
     }
 }

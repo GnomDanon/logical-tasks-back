@@ -11,6 +11,7 @@ import ru.tasks.logical.task.repository.TaskRepository;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,7 +20,7 @@ public class TaskService {
 
     private final TaskRepository taskRepository;
 
-    public List<TaskInfo> getTasksByAuthorId(Long authorId) {
+    public List<TaskInfo> getTasksByAuthorId(UUID authorId) {
         return taskRepository.findAllByAuthor_Id(authorId)
                 .stream()
                 .map(TaskMapper::mapTaskToTaskInfo)

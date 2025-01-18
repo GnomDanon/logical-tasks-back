@@ -5,8 +5,9 @@ import org.springframework.stereotype.Repository;
 import ru.tasks.logical.document.entity.Document;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
-public interface DocumentRepository extends JpaRepository<Document, Long> {
-	List<Document> findAllByOwner_Id(Long ownerId);
+public interface DocumentRepository extends JpaRepository<Document, UUID> {
+	List<Document> findAllByOwner_Id(UUID ownerId);
 }
