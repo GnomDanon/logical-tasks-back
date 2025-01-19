@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.tasks.logical.document.exception.DocumentNotExistsException;
+import ru.tasks.logical.task.exception.TaskNotExistsException;
 import ru.tasks.logical.task.generator.dto.questions.generate.GenerateQuestionsRequest;
 import ru.tasks.logical.task.generator.dto.questions.generate.GenerateQuestionsResponse;
 import ru.tasks.logical.task.generator.dto.questions.update.UpdateQuestionsRequest;
@@ -76,7 +77,7 @@ public class TaskGeneratorController {
 	public ResponseEntity<GenerateTaskResponse> generateTask(@RequestBody GenerateTaskRequest request) {
 		try {
 			return ResponseEntity.ok(taskGeneratorService.generateTask(request));
-		} catch (Exception e) {
+		} catch (TaskNotExistsException e) {
 			return ResponseEntity.internalServerError().build();
 		}
 	}
