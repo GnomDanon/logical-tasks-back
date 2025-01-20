@@ -125,6 +125,7 @@ public class TaskGeneratorService {
 			}
 		}
 		task.setQuestions(questionsToSave);
+		task.setMaxScore(questionsDto.length);
 		taskRepository.save(task);
 
 		return new GenerateQuestionsResponse().setTaskId(taskId).setQuestions(questionsDto);
@@ -158,6 +159,7 @@ public class TaskGeneratorService {
 			}
 		}
 		task.setQuestions(questionsToSave);
+		task.setMaxScore(questions.length);
 		taskRepository.save(task);
 
 		return new UpdateQuestionsResponse().setTaskId(taskId).setQuestions(questions);
@@ -177,6 +179,7 @@ public class TaskGeneratorService {
 				CrosswordQuestions questions = crosswordQuestionsConverter.convertToEntityAttribute(task.getQuestions());
 				Crossword crossword = crosswordGenerator.generateCrossword(questions);
 				content = crosswordAttributeConverter.convertToDatabaseColumn(crossword);
+				task.setMaxScore(crossword.getAcross().length + crossword.getDown().length);
 			}
 		}
 		task.setName(taskName);
