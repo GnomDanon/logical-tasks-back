@@ -11,7 +11,6 @@ public class TaskMapper {
         TaskInfo taskInfo = new TaskInfo();
         taskInfo.setId(task.getId());
         taskInfo.setName(task.getName());
-        taskInfo.setDescription(task.getDescription());
         taskInfo.setAuthor(UserMapper.mapUserToUserInfo(task.getAuthor()));
         taskInfo.setTaskType(task.getTaskType());
         taskInfo.setMaxScore(task.getMaxScore());

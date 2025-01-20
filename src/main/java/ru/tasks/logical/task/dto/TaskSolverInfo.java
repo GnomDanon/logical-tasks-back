@@ -2,26 +2,30 @@ package ru.tasks.logical.task.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import ru.tasks.logical.user.dto.UserInfo;
+import lombok.experimental.Accessors;
 
 import java.util.UUID;
 
 @Data
+@Accessors(chain = true)
 @Schema(description = "Соотношение Задание - Решающий")
 public class TaskSolverInfo {
 
     @Schema(description = "Идентификатор соотношения Задание - Решающий")
     private UUID id;
 
-    @Schema(description = "Пользователь, решающий задание")
-    private UserInfo solver;
+    @Schema(description = "Имя решающего задание")
+    private String firstName;
 
-    @Schema(description = "Задание, которое решает пользователь")
-    private TaskInfo taskInfo;
+    @Schema(description = "Фамилия решающего задание")
+    private String lastName;
+
+    @Schema(description = "Идентификатор задания, которое решает пользователь")
+    private UUID taskId;
 
     @Schema(description = "Счет, который набрал пользователь")
     private int score;
 
-    @Schema(description = "Решено ли задание")
-    private boolean isSolved;
+    @Schema(description = "Максимально возможный счет")
+    private int maxScore;
 }

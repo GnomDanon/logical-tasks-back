@@ -6,8 +6,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.tasks.logical.task.dto.CreateTaskSolverRequest;
 import ru.tasks.logical.task.dto.Task;
 import ru.tasks.logical.task.dto.TaskInfo;
 import ru.tasks.logical.task.dto.TaskSolverInfo;
@@ -53,7 +56,21 @@ public class TaskController {
 
     @Operation(summary = "Получение всех студентов, решающих заданное задание")
     @GetMapping("/taskSolvers/{taskId}")
-    public List<TaskSolverInfo> getTaskSolvers(@PathVariable UUID taskId) {
-        return taskSolverService.getTaskSolversByTaskId(taskId);
+    public ResponseEntity<List<TaskSolverInfo>> getTaskSolvers(@PathVariable UUID taskId) {
+        try {
+            return ResponseEntity.ok(taskSolverService.getTaskSolversByTaskId(taskId));
+        } catch (TaskNotExistsException e) {
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    @Operation(summary = "Фиксация решения задачи")
+    @PostMapping("/taskSolvers/create")
+    public ResponseEntity<TaskSolverInfo> createTaskSolver(@RequestBody CreateTaskSolverRequest request) {
+        try {
+            return ResponseEntity.ok(taskSolverService.createTaskSolverInfo(request));
+        } catch (TaskNotExistsException e) {
+            return ResponseEntity.internalServerError().build();
+        }
     }
 }

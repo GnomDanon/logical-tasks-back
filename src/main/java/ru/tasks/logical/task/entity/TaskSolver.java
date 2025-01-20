@@ -12,13 +12,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.tasks.logical.user.entity.User;
+import lombok.experimental.Accessors;
 
 import java.util.UUID;
 
 @Entity
 @Getter
 @Setter
+@Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "task_solver")
@@ -29,15 +30,14 @@ public class TaskSolver {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "last_name")
+    private String lastName;
+
     @Column(name = "score")
     private int score;
-
-    @Column(name = "is_solved")
-    private boolean isSolved;
-
-    @ManyToOne
-    @JoinColumn(name = "solver_id")
-    private User solver;
 
     @ManyToOne
     @JoinColumn(name = "task_id")

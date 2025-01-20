@@ -19,7 +19,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import ru.tasks.logical.document.entity.Document;
 import ru.tasks.logical.task.entity.Task;
-import ru.tasks.logical.task.entity.TaskSolver;
 
 import java.util.Collection;
 import java.util.List;
@@ -60,9 +59,6 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "owner")
     private List<Document> documents;
-
-    @OneToMany(mappedBy = "solver")
-    private List<TaskSolver> tasksSolver;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

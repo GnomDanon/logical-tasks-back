@@ -19,9 +19,6 @@ public class TaskInfo {
     @Schema(description = "Название задания")
     private String name;
 
-    @Schema(description = "Описание задания")
-    private String description;
-
     @Schema(description = "Автор задания")
     private UserInfo author;
 

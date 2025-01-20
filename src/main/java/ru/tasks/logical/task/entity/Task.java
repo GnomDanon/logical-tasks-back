@@ -40,9 +40,6 @@ public class Task {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "description")
-    private String description;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "task_type")
     private TaskType taskType;
