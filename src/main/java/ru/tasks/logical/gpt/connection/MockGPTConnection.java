@@ -35,17 +35,17 @@ public class MockGPTConnection implements GPTConnection {
 	};
 
 	@Override
-	public String[] generateTerms(byte[] document, int termsCount) {
+	public String[] generateTerms(String fileName, byte[] document, int termsCount) {
 		return terms;
 	}
 
 	@Override
-	public CrosswordQuestionItem[] generateCrossword(byte[] document, String[] terms, int questionsCount) {
+	public CrosswordQuestionItem[] generateCrossword(String fileName, byte[] document, String[] terms, int questionsCount) {
 		return crosswordQuestionItems;
 	}
 
 	@Override
-	public TestItem[] generateTest(byte[] document, String[] terms, int questionsCount) {
+	public TestItem[] generateTest(String fileName, byte[] document, String[] terms, int questionsCount) {
 		return testItems;
 	}
 }

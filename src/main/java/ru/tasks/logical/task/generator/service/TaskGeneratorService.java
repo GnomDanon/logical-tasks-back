@@ -58,11 +58,12 @@ public class TaskGeneratorService {
 		String taskType = request.getTaskType();
 
 		Document document = documentService.findById(documentId);
+		String fileName = document.getName();
 		byte[] documentContent = document.getContent();
 
 		User author = userService.getById(authorId);
 
-		String[] terms = gptService.generateTerms(documentContent, termsCount);
+		String[] terms = gptService.generateTerms(fileName, documentContent, termsCount);
 
 		Task task = new Task()
 				.setTerms(String.join(" ", terms))
@@ -102,13 +103,14 @@ public class TaskGeneratorService {
 		String[] terms = task.getTerms().split(" ");
 		UUID documentId = task.getDocumentBasedOn().getId();
 		Document document = documentService.findById(documentId);
+		String fileName = document.getName();
 
 		TaskType type = task.getTaskType();
 		String questionsToSave = "";
 		Question[] questionsDto = new Question[questionsCount];
 		switch (type) {
 			case TEST -> {
-				TestItem[] questions = gptService.generateTest(document.getContent(), terms, questionsCount);
+				TestItem[] questions = gptService.generateTest(fileName, document.getContent(), terms, questionsCount);
 				questionsToSave = testQuestionsConverter.convertToDatabaseColumn(new TestQuestions(questions));
 				for (int i = 0; i < questionsCount; i++) {
 					TestItem question = questions[i];
@@ -116,7 +118,7 @@ public class TaskGeneratorService {
 				}
 			}
 			case CROSSWORD -> {
-				CrosswordQuestionItem[] questions = gptService.generateCrossword(document.getContent(), terms, questionsCount);
+				CrosswordQuestionItem[] questions = gptService.generateCrossword(fileName, document.getContent(), terms, questionsCount);
 				questionsToSave = crosswordQuestionsConverter.convertToDatabaseColumn(new CrosswordQuestions(questions));
 				for (int i = 0; i < questionsCount; i++) {
 					CrosswordQuestionItem question = questions[i];

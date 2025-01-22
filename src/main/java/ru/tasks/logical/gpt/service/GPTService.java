@@ -12,15 +12,15 @@ public class GPTService {
 
 	private final GPTConnection gptConnection;
 
-	public String[] generateTerms(byte[] document, int termsCount) {
-		return gptConnection.generateTerms(document, termsCount);
+	public String[] generateTerms(String fileName, byte[] document, int termsCount) {
+		return gptConnection.generateTerms(fileName, document, termsCount);
 	}
 
-	public CrosswordQuestionItem[] generateCrossword(byte[] document, String[] terms, int questionsCount) {
-		return gptConnection.generateCrossword(document, terms, questionsCount);
+	public CrosswordQuestionItem[] generateCrossword(String fileName, byte[] document, String[] terms, int questionsCount) {
+		return gptConnection.generateCrossword(fileName, document, terms, questionsCount);
 	}
 
-	public TestItem[] generateTest(byte[] document, String[] terms, int questionsCount) {
-		return gptConnection.generateTest(document, terms, questionsCount);
+	public TestItem[] generateTest(String fileName, byte[] document, String[] terms, int questionsCount) {
+		return gptConnection.generateTest(fileName, document, terms, questionsCount);
 	}
 }
