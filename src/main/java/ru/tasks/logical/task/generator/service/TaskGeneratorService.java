@@ -34,6 +34,7 @@ import ru.tasks.logical.user.entity.User;
 import ru.tasks.logical.user.exception.UserNotFoundException;
 import ru.tasks.logical.user.service.UserService;
 
+import java.util.Arrays;
 import java.util.UUID;
 
 @Service
@@ -121,7 +122,7 @@ public class TaskGeneratorService {
 			}
 			case CROSSWORD -> {
 				CrosswordQuestionItem[] questions = gptService.generateCrossword(fileName, document.getContent(), terms, questionsCount);
-				questionsToSave = crosswordQuestionsConverter.convertToDatabaseColumn(new CrosswordQuestions(questions));
+				questionsToSave = crosswordQuestionsConverter.convertToDatabaseColumn(new CrosswordQuestions(questions.length > questionsCount ? Arrays.copyOfRange(questions, 0, questionsCount) : questions));
 				realQuestionsCount = questions.length;
 				for (int i = 0; i < questions.length && i < questionsDto.length; i++) {
 					CrosswordQuestionItem question = questions[i];
