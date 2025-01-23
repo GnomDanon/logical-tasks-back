@@ -116,7 +116,7 @@ public class TaskGeneratorService {
 				realQuestionsCount = questions.length;
 				for (int i = 0; i < questions.length && i < questionsDto.length; i++) {
 					TestItem question = questions[i];
-					questionsDto[i] = Question.test(question.getQuestion(), question.getAnswers(), question.correctAnswerIndex());
+					questionsDto[i] = Question.test(question.getQuestion(), question.getAnswers(), question.getCorrectAnswer());
 				}
 			}
 			case CROSSWORD -> {

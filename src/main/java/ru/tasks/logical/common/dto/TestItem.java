@@ -12,5 +12,24 @@ import lombok.NoArgsConstructor;
 public class TestItem {
 	String question;
 	String[] answers;
-	int correctAnswerIndex;
+	String correctAnswer;
+
+	public TestItem(String question, String[] answers, int correctAnswerIndex) {
+		this.question = question;
+		this.answers = answers;
+		this.correctAnswer = Integer.toString(correctAnswerIndex);
+	}
+
+	public int getCorrectAnswer() {
+		try {
+			return Integer.parseInt(correctAnswer);
+		} catch (NumberFormatException exception) {
+			return switch (correctAnswer) {
+				case "B" -> 1;
+				case "C" -> 2;
+				case "D" -> 3;
+				default -> 0;
+			};
+		}
+	}
 }
