@@ -108,29 +108,36 @@ public class TaskGeneratorService {
 		TaskType type = task.getTaskType();
 		String questionsToSave = "";
 		Question[] questionsDto = new Question[questionsCount];
+		int realQuestionsCount = 0;
 		switch (type) {
 			case TEST -> {
 				TestItem[] questions = gptService.generateTest(fileName, document.getContent(), terms, questionsCount);
 				questionsToSave = testQuestionsConverter.convertToDatabaseColumn(new TestQuestions(questions));
-				for (int i = 0; i < questionsCount; i++) {
+				realQuestionsCount = questions.length;
+				for (int i = 0; i < questions.length && i < questionsDto.length; i++) {
 					TestItem question = questions[i];
-					questionsDto[i] = Question.test(question.getQuestion(), question.getAnswers(), question.getCorrectAnswerIndex());
+					questionsDto[i] = Question.test(question.getQuestion(), question.getAnswers(), question.correctAnswerIndex());
 				}
 			}
 			case CROSSWORD -> {
 				CrosswordQuestionItem[] questions = gptService.generateCrossword(fileName, document.getContent(), terms, questionsCount);
 				questionsToSave = crosswordQuestionsConverter.convertToDatabaseColumn(new CrosswordQuestions(questions));
-				for (int i = 0; i < questionsCount; i++) {
+				realQuestionsCount = questions.length;
+				for (int i = 0; i < questions.length && i < questionsDto.length; i++) {
 					CrosswordQuestionItem question = questions[i];
 					questionsDto[i] = Question.crossword(question.getQuestion(), question.getAnswer());
 				}
 			}
 		}
+		Question[] realQuestionsDto = new Question[Math.min(realQuestionsCount, questionsCount)];
+		for (int i = 0; i < realQuestionsCount && i < questionsDto.length; i++) {
+			realQuestionsDto[i] = questionsDto[i];
+		}
 		task.setQuestions(questionsToSave);
-		task.setMaxScore(questionsDto.length);
+		task.setMaxScore(realQuestionsDto.length);
 		taskRepository.save(task);
 
-		return new GenerateQuestionsResponse().setTaskId(taskId).setQuestions(questionsDto);
+		return new GenerateQuestionsResponse().setTaskId(taskId).setQuestions(realQuestionsDto);
 	}
 
 	public UpdateQuestionsResponse updateQuestions(UpdateQuestionsRequest request) throws TaskNotExistsException {
