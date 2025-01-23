@@ -5,19 +5,18 @@ import lombok.Getter;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
 public class CrosswordPuzzle {
-
 	private final char emptyCell = '_';
-
 	private final int gridSize;
-
 	private final char[][] grid;
 
+	@Getter
 	private final List<Word> words = new ArrayList<>();
 
+	@Getter
 	private int verticalCount = 0;
 
+	@Getter
 	private int horizontalCount = 0;
 
 	public CrosswordPuzzle(int gridSize) {

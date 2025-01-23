@@ -61,50 +61,6 @@ public class CrosswordPuzzleGenerator {
 				horizontalIndex++;
 			}
 		}
-
-		char[][] grid = bestGrid.getGrid();
-		char emptyCell = bestGrid.getEmptyCell();
-		int emptyRowsCount = 0;
-		int emptyColumnCount = 0;
-
-		for (int row = 0; row < gridSize; row++) {
-			boolean isEmptyRow = true;
-			for (int column = 0; column < gridSize; column++) {
-				if (grid[row][column] != emptyCell) {
-					isEmptyRow = false;
-					break;
-				}
-			}
-			if (!isEmptyRow) {
-				break;
-			}
-			emptyRowsCount++;
-		}
-
-		for (int column = 0; column < gridSize; column++) {
-			boolean isEmptyColumn = true;
-			for (int row = 0; row < gridSize; row++) {
-				if (grid[row][column] != emptyCell) {
-					isEmptyColumn = false;
-					break;
-				}
-			}
-			if (!isEmptyColumn) {
-				break;
-			}
-			emptyColumnCount++;
-		}
-
-		for (CrosswordItem item : horizontal) {
-			item.setRow(item.getRow() - emptyRowsCount);
-			item.setCol(item.getCol() - emptyColumnCount);
-		}
-
-		for (CrosswordItem item : vertical) {
-			item.setRow(item.getRow() - emptyRowsCount);
-			item.setCol(item.getCol() - emptyRowsCount);
-		}
-
 		return new Crossword(horizontal, vertical);
 	}
 
