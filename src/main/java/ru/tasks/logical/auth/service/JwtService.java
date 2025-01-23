@@ -92,6 +92,8 @@ public class JwtService {
             claims.put("id", customUserDetails.getId());
             claims.put("email", customUserDetails.getEmail());
             claims.put("role", customUserDetails.getRole());
+            claims.put("firstName", customUserDetails.getFirstName());
+            claims.put("lastName", customUserDetails.getLastName());
         }
         return generateToken(claims, userDetails);
     }

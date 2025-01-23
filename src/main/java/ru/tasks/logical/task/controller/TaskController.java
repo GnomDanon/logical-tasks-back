@@ -39,7 +39,7 @@ public class TaskController {
     }
 
     @Operation(summary = "Получение задания")
-    @GetMapping("/{taskId}")
+    @GetMapping("/get/{taskId}")
     public ResponseEntity<Task> getById(@PathVariable UUID taskId) {
         try {
             return ResponseEntity.ok(taskService.getById(taskId));
