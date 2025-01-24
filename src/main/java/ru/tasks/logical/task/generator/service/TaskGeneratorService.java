@@ -72,7 +72,7 @@ public class TaskGeneratorService {
 				.setDocumentBasedOn(document);
 
 		//Временное решение
-		if (taskType.equals("Тест")) {
+		if (taskType.equals("TEST")) {
 			task.setTaskType(TaskType.TEST);
 		} else {
 			task.setTaskType(TaskType.CROSSWORD);

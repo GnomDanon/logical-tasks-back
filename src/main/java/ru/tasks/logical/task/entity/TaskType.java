@@ -4,8 +4,8 @@ import lombok.Getter;
 
 @Getter
 public enum TaskType {
-    CROSSWORD("Кроссворд", "http://localhost:8080/getCrosswordImage"),
-    TEST("Тест", "http://localhost:8080/getTestImage");
+    CROSSWORD("CROSSWORD", "http://localhost:8080/getCrosswordImage"),
+    TEST("TEST", "http://localhost:8080/getTestImage");
 
     TaskType(String name, String imageUri) {
         this.name = name;
