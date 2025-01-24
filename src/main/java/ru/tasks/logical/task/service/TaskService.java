@@ -21,6 +21,7 @@ import ru.tasks.logical.task.mapper.TaskMapper;
 import ru.tasks.logical.task.mapper.TaskTypeMapper;
 import ru.tasks.logical.task.repository.TaskRepository;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
@@ -56,7 +57,7 @@ public class TaskService {
         String content = task.getContent();
         String questions = task.getQuestions();
         TaskType taskType = task.getTaskType();
-        Question[] taskQuestions = new Question[task.getMaxScore()];
+        List<Question> taskQuestions = new ArrayList<>();
 
         if (content != null) {
             switch (taskType) {
@@ -75,19 +76,23 @@ public class TaskService {
                     TestQuestions testQuestions = testQuestionsConverter.convertToEntityAttribute(questions);
                     for (int i = 0; i < testQuestions.getQuestions().length; i++) {
                         TestItem testItem = testQuestions.getQuestions()[i];
-                        taskQuestions[i] = Question.test(testItem.getQuestion(), testItem.getAnswers(), testItem.getCorrectAnswer());
+                        taskQuestions.add(Question.test(testItem.getQuestion(), testItem.getAnswers(), testItem.getCorrectAnswer()));
                     }
                 }
                 case CROSSWORD -> {
                     CrosswordQuestions crosswordQuestions = crosswordQuestionsConverter.convertToEntityAttribute(questions);
                     for (int i = 0; i < crosswordQuestions.getQuestions().length; i++) {
                         CrosswordQuestionItem crosswordItem = crosswordQuestions.getQuestions()[i];
-                        taskQuestions[i] = Question.crossword(crosswordItem.getQuestion(), crosswordItem.getAnswer());
+                        taskQuestions.add(Question.crossword(crosswordItem.getQuestion(), crosswordItem.getAnswer()));
                     }
                 }
             }
         }
 
-        return new Task().setTaskInfo(taskInfo).setContent(content).setQuestion(taskQuestions);
+        Question[] realTaskQuestion = new Question[taskQuestions.size()];
+        for (int i = 0; i < realTaskQuestion.length; i++) {
+            realTaskQuestion[i] = taskQuestions.get(i);
+        }
+        return new Task().setTaskInfo(taskInfo).setContent(content).setQuestion(realTaskQuestion);
     }
 }
