@@ -61,6 +61,34 @@ public class CrosswordPuzzleGenerator {
 				horizontalIndex++;
 			}
 		}
+
+		int minColumn = Integer.MAX_VALUE;
+		int minRow = Integer.MAX_VALUE;
+		for (CrosswordItem item : vertical) {
+			if (item.getCol() < minColumn) {
+				minColumn = item.getCol();
+			}
+			if (item.getRow() < minRow) {
+				minRow = item.getRow();
+			}
+		}
+		for (CrosswordItem item : horizontal) {
+			if (item.getCol() < minColumn) {
+				minColumn = item.getCol();
+			}
+			if (item.getRow() < minRow) {
+				minRow = item.getRow();
+			}
+		}
+		for (CrosswordItem item : vertical) {
+			item.setCol(item.getCol() - minColumn);
+			item.setRow(item.getRow() - minRow);
+		}
+		for (CrosswordItem item : horizontal) {
+			item.setCol(item.getCol() - minColumn);
+			item.setRow(item.getRow() - minRow);
+		}
+
 		return new Crossword(horizontal, vertical);
 	}
 
