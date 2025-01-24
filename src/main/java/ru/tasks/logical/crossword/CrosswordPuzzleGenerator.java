@@ -35,7 +35,7 @@ public class CrosswordPuzzleGenerator {
 			questionsMemory.put(item.getAnswer().toLowerCase(), item.getQuestion());
 			gridSize += item.getAnswer().length();
 		}
-		gridSize /= 3;
+//		gridSize /= 2;
 	}
 
 	public Crossword createCrosswordPuzzle() {
