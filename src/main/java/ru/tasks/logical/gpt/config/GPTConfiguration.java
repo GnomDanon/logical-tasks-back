@@ -11,6 +11,6 @@ public class GPTConfiguration {
 
 	@Bean
 	public GPTConnection gptConnection() {
-		return new MockGPTConnection();
+		return new GPTConnectionService();
 	}
 }
